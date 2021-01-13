@@ -1,0 +1,4 @@
+service:
+  name: cassandra
+  remote_ips: <remote_ips>
+  remote_port: 7070

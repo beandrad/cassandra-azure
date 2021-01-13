@@ -1,0 +1,8 @@
+.terraform
+terraform.*
+.terraform.*
+crash.log
+*.tfplan
+*.tfvars
+.env
+dev-config.yaml

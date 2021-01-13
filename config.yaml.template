@@ -1,0 +1,27 @@
+clusterPrefix: Poste
+environment: dev
+maxDcSeedCount: 2
+vmAdminUsername: adminuser
+vmAdminPassword: REDACTED
+datacenters:
+  - name: a
+    location: westeurope
+    vmCount: 2
+    addressSpace: 10.0.0.0/16
+    subnetPrefix: 10.0.0.0/24
+  - name: b
+    location: northeurope
+    vmCount: 1
+    addressSpace: 10.1.0.0/16
+    subnetPrefix: 10.1.0.0/24
+terraform:
+  client_id: REDACTED
+  client_secret: REDACTED
+  subscription_id: REDACTED
+  tenant_id: REDACTED
+  backend:
+    rgName: tfstate
+    saName: tfstate
+    containerName: tfstate
+
+
