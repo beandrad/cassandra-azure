@@ -158,6 +158,18 @@ resource "azurerm_linux_virtual_machine" "dc" {
     }
   }
 
+  provisioner "file" {
+    source      = "${path.module}/scripts/start-cassandra.sh"
+    destination = "/tmp/start-cassandra.sh"
+
+    connection {
+      type     = "ssh"
+      host     = self.public_ip_address
+      user     = var.vm_admin_username
+      password = var.vm_admin_password
+    }
+  }
+
   tags = {
     environment = var.environment
   }

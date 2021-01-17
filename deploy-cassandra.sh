@@ -90,6 +90,17 @@ for vm in $(echo "${vms}" | jq -r '.[] | @base64'); do
         --scripts "bash /tmp/setup-cassandra.sh '$clusterPrefix $environment' '$seeds' '$vmPrivateIp' $dcName"
 done
 
+echo -e "\n\e[34m»»» \e[96mStarting Cassandra nodes\e[0m..."
+for vm in $(echo "${vms}" | jq -r '.[] | @base64'); do
+    vm=$(echo $vm | base64 --decode | jq -r)
+    rgName=$(echo $vm | jq -r '.rg_name')
+    vmName=$(echo $vm | jq -r '.name')
+    az vm run-command invoke --command-id RunShellScript \
+        --resource-group $rgName \
+        --name $vmName \
+        --scripts "bash /tmp/start-cassandra.sh"
+done 
+
 # Add prometheus service monitor
 # create service-monitor-values.yaml
 echo -e "\n\e[34m»»» \e[96mAdding prometheus service monitor\e[0m..."
